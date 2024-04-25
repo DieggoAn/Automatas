@@ -1,9 +1,21 @@
 import tkinter as tk
+from tkinter import messagebox
 
 def save_text():
     for row in range(len(entry_fields)):
+        row_data = []
         for col in range(len(entry_fields[row])):
-            text_data[row][col] = entry_fields[row][col].get()
+            text = entry_fields[row][col].get().strip()
+            if text:
+                row_data.append(text)
+            else:
+                break
+        else:
+            # All columns in the row have non-null values, so save the row's data
+            text_data[row] = row_data
+
+    # Show pop-up notification
+    messagebox.showinfo("Success", "Data saved successfully!")
 
 def add_new_row():
     global num_rows
